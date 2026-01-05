@@ -20,6 +20,14 @@
             audio.play();
         }
     </script>
+    <style>
+        /* Mobile scaling wrapper */
+        @media only screen and (max-width: 768px) {
+            #wrap {
+                transform-origin: top left;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="main">
@@ -42,10 +50,11 @@
                 </div>
             </div>
             <div id="clock-box">
-                <span id="clock">577 days 0 hours 0 minutes 0 seconds</span> <!-- Change to "6940 days..." if needed -->
+                <span id="clock">577 days 0 hours 0 minutes 0 seconds</span>
             </div>
             <canvas id="canvas" width="1100" height="680"></canvas>
         </div>
+        <div id="message-box"></div>
     </div>
 
     <script>
@@ -57,60 +66,66 @@
             return false;
         }
 
-        // Mobile responsive sizing
+        // Simple mobile scaling
+        var scale = 1;
         var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        var width, height;
         
         if (isMobile) {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            // Adjust wrap and canvas size for mobile
+            var viewportWidth = window.innerWidth;
+            var viewportHeight = window.innerHeight;
+            scale = Math.min(viewportWidth / 1100, viewportHeight / 680);
+            
             $('#wrap').css({
-                'width': width + 'px',
-                'height': height + 'px',
-                'margin-top': '0'
+                'transform': 'scale(' + scale + ')',
+                'transform-origin': 'top center',
+                'margin': '0 auto',
+                'position': 'absolute',
+                'left': '50%',
+                'margin-left': '-550px'
             });
-        } else {
-            width = canvas.width();
-            height = canvas.height();
+            
+            $('body').css({
+                'height': (680 * scale) + 'px',
+                'overflow': 'hidden'
+            });
         }
-        
+
+        var width = canvas.width();
+        var height = canvas.height();        
         canvas.attr("width", width);
         canvas.attr("height", height);
 
-        var scale = isMobile ? Math.min(width / 1100, height / 680) : 1;
-        
         var opts = {
             seed: {
                 x: width / 2 - 20,
                 color: "rgb(190, 26, 37)",
-                scale: isMobile ? 1.5 : 2
+                scale: 2
             },
             branch: [
-                [535 * scale, 680 * scale, 570 * scale, 250 * scale, 500 * scale, 200 * scale, 30, 100, [
-                    [540 * scale, 500 * scale, 455 * scale, 417 * scale, 340 * scale, 400 * scale, 13, 100, [
-                        [450 * scale, 435 * scale, 434 * scale, 430 * scale, 394 * scale, 395 * scale, 2, 40]
+                [535, 680, 570, 250, 500, 200, 30, 100, [
+                    [540, 500, 455, 417, 340, 400, 13, 100, [
+                        [450, 435, 434, 430, 394, 395, 2, 40]
                     ]],
-                    [550 * scale, 445 * scale, 600 * scale, 356 * scale, 680 * scale, 345 * scale, 12, 100, [
-                        [578 * scale, 400 * scale, 648 * scale, 409 * scale, 661 * scale, 426 * scale, 3, 80]
+                    [550, 445, 600, 356, 680, 345, 12, 100, [
+                        [578, 400, 648, 409, 661, 426, 3, 80]
                     ]],
-                    [539 * scale, 281 * scale, 537 * scale, 248 * scale, 534 * scale, 217 * scale, 3, 40],
-                    [546 * scale, 397 * scale, 413 * scale, 247 * scale, 328 * scale, 244 * scale, 9, 80, [
-                        [427 * scale, 286 * scale, 383 * scale, 253 * scale, 371 * scale, 205 * scale, 2, 40],
-                        [498 * scale, 345 * scale, 435 * scale, 315 * scale, 395 * scale, 330 * scale, 4, 60]
+                    [539, 281, 537, 248, 534, 217, 3, 40],
+                    [546, 397, 413, 247, 328, 244, 9, 80, [
+                        [427, 286, 383, 253, 371, 205, 2, 40],
+                        [498, 345, 435, 315, 395, 330, 4, 60]
                     ]],
-                    [546 * scale, 357 * scale, 608 * scale, 252 * scale, 678 * scale, 221 * scale, 6, 100, [
-                        [590 * scale, 293 * scale, 646 * scale, 277 * scale, 648 * scale, 271 * scale, 2, 80]
+                    [546, 357, 608, 252, 678, 221, 6, 100, [
+                        [590, 293, 646, 277, 648, 271, 2, 80]
                     ]]
                 ]] 
             ],
             bloom: {
-                num: isMobile ? 400 : 700,
-                width: width,
-                height: height,
+                num: 700,
+                width: 1080,
+                height: 650,
             },
             footer: {
-                width: width,
+                width: 1200,
                 height: 5,
                 speed: 10,
             }
