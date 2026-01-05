@@ -1,10 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Birthday Fiza 💞</title>	    
-    <link type="text/css" rel="stylesheet" href="./default.css">
+    <title>Happy Birthday Fiza 💞</title>
     <script type="text/javascript" src="./jquery_min.js"></script>
     <script type="text/javascript" src="./jscex_min.js"></script>
     <script type="text/javascript" src="./jscex-parser.js"></script>
@@ -12,146 +11,305 @@
     <script type="text/javascript" src="./jscex-builderbase_min.js"></script>
     <script type="text/javascript" src="./jscex-async_min.js"></script>
     <script type="text/javascript" src="./jscex-async-powerpack_min.js"></script>
-    <script type="text/javascript" src="./functions.js" charset="utf-8"></script>
-    <script type="text/javascript" src="./love.js" charset="utf-8"></script>
-    <script>
-        function playAudio() {
-            var audio = document.getElementById("myAudio");
-            audio.play();
-        }
-    </script>
+    <script type="text/javascript" src="./functions.js"></script>
+    <script type="text/javascript" src="./love.js"></script>
     <style>
-        /* Mobile scaling wrapper */
-        @media only screen and (max-width: 768px) {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: url('./img2.png') center center no-repeat;
+            background-size: cover;
+            font-family: 'Segoe UI', Tahoma, sans-serif, 'Noto Nastaliq Urdu';
+            color: white;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #main {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        #wrap {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        #canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            z-index: 100;
+            text-align: center;
+        }
+        
+        #code {
+            display: none;
+            color: rgb(196, 255, 255);
+            font-size: 18px;
+            line-height: 32px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+        
+        .say {
+            display: block;
+            margin: 8px 0;
+        }
+        
+        #clock-box {
+            position: fixed;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            display: none;
+            z-index: 100;
+            font-size: 18px;
+            width: 90%;
+        }
+        
+        #clock {
+            display: block;
+            margin-top: 5px;
+        }
+        
+        #clock .digit {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        
+        #message-box {
+            position: fixed;
+            bottom: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            width: 90%;
+        }
+        
+        #error {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .hand {
+            cursor: pointer;
+        }
+        
+        /* Larger phones */
+        @media only screen and (min-width: 400px) {
+            #code {
+                font-size: 20px;
+                line-height: 36px;
+            }
+            #clock-box {
+                font-size: 20px;
+            }
+            #clock .digit {
+                font-size: 36px;
+            }
+            #message-box {
+                font-size: 18px;
+            }
+        }
+        
+        /* Desktop */
+        @media only screen and (min-width: 769px) {
             #wrap {
-                transform-origin: top left;
+                width: 1100px;
+                height: 680px;
+                margin: 20px auto;
+                position: relative;
+            }
+            #canvas {
+                width: 1100px;
+                height: 680px;
+            }
+            #text {
+                width: 300px;
+                max-width: none;
+                left: 200px;
+                top: 100px;
+                transform: none;
+            }
+            #code {
+                font-size: 16px;
+                line-height: 28px;
+            }
+            #clock-box {
+                left: 60px;
+                bottom: auto;
+                top: 550px;
+                transform: none;
+                font-size: 24px;
+            }
+            #clock .digit {
+                font-size: 48px;
+            }
+            #message-box {
+                left: 50%;
+                bottom: auto;
+                top: 450px;
+                transform: translateX(-50%);
+                font-size: 20px;
             }
         }
     </style>
 </head>
 <body>
     <div id="main">
-        <div id="error"><a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a> (<a href="http://firefox.com.cn/download/">Firefox</a>)</div>
-        <audio autoplay="autoplay" height="100" width="100" id="myAudio">
-            <source src="aud.mp3" type="audio/mp3" />
-            <embed height="100" width="100" src="aud.mp3" />
+        <div id="error">
+            <a href="https://www.google.com/chrome/">Chrome</a> یا 
+            <a href="https://www.mozilla.org/firefox/">Firefox</a> استعمال کریں
+        </div>
+        
+        <audio autoplay loop id="myAudio">
+            <source src="aud.mp3" type="audio/mp3">
         </audio>
+        
         <div id="wrap">
+            <canvas id="canvas"></canvas>
+            
             <div id="text">
                 <div id="code">
-                    <span class="say">خوبصورت فضا 💞</span><br>
-                    <span class="say">جنم دن مبارک 🎈🎂</span><br>
-                    <span class="say">اللہ آپ کو ہمیشہ خوش رکھے 🤲</span><br>
-                    <span class="say">اور آپ کو ڈھیروں خوشیاں عطا فرمائے 💕</span><br>
-                    <span class="say">آپ کی زندگی خوشیوں سے بھری ہو ✨</span><br>
-                    <span class="say">اللہ آپ کی تمام دعائیں قبول فرمائے 🌟</span><br>
-                    <span class="say">آپ کو صحت، کامیابی اور خوشحالی نصیب ہو 🌺</span><br>
-                    <span class="say">زندگی میں ہمیشہ مسکراتے رہیں 😊❤️</span><br>
+                    <span class="say">خوبصورت فضا 💞</span>
+                    <span class="say">جنم دن مبارک 🎈🎂</span>
+                    <span class="say">اللہ آپ کو ہمیشہ خوش رکھے 🤲</span>
+                    <span class="say">اور آپ کو ڈھیروں خوشیاں عطا فرمائے 💕</span>
+                    <span class="say">آپ کی زندگی خوشیوں سے بھری ہو ✨</span>
+                    <span class="say">اللہ آپ کی تمام دعائیں قبول فرمائے 🌟</span>
+                    <span class="say">آپ کو صحت، کامیابی اور خوشحالی نصیب ہو 🌺</span>
+                    <span class="say">زندگی میں ہمیشہ مسکراتے رہیں 😊❤️</span>
                 </div>
             </div>
+            
             <div id="clock-box">
-                <span id="clock">577 days 0 hours 0 minutes 0 seconds</span>
+                <div id="message-box"></div>
+                <span id="clock"></span>
             </div>
-            <canvas id="canvas" width="1100" height="680"></canvas>
         </div>
-        <div id="message-box"></div>
     </div>
 
     <script>
     (function() {
-        var canvas = $('#canvas');
-		
-        if (!canvas[0].getContext) {
+        var canvas = $('#canvas')[0];
+        
+        if (!canvas.getContext) {
             $("#error").show();
             return false;
         }
 
-        // Simple mobile scaling
-        var scale = 1;
-        var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        // Get actual screen size
+        var width = window.innerWidth;
+        var height = window.innerHeight;
         
-        if (isMobile) {
-            var viewportWidth = window.innerWidth;
-            var viewportHeight = window.innerHeight;
-            scale = Math.min(viewportWidth / 1100, viewportHeight / 680);
-            
-            $('#wrap').css({
-                'transform': 'scale(' + scale + ')',
-                'transform-origin': 'top center',
-                'margin': '0 auto',
-                'position': 'absolute',
-                'left': '50%',
-                'margin-left': '-550px'
-            });
-            
-            $('body').css({
-                'height': (680 * scale) + 'px',
-                'overflow': 'hidden'
-            });
+        // For desktop, use fixed size
+        if (width > 768) {
+            width = 1100;
+            height = 680;
         }
+        
+        canvas.width = width;
+        canvas.height = height;
 
-        var width = canvas.width();
-        var height = canvas.height();        
-        canvas.attr("width", width);
-        canvas.attr("height", height);
-
+        // Scale tree coordinates for screen size
+        var scaleX = width / 1100;
+        var scaleY = height / 680;
+        
         var opts = {
             seed: {
-                x: width / 2 - 20,
+                x: width / 2,
                 color: "rgb(190, 26, 37)",
-                scale: 2
+                scale: Math.min(scaleX, scaleY) * 2
             },
             branch: [
-                [535, 680, 570, 250, 500, 200, 30, 100, [
-                    [540, 500, 455, 417, 340, 400, 13, 100, [
-                        [450, 435, 434, 430, 394, 395, 2, 40]
+                [535*scaleX, 680*scaleY, 570*scaleX, 250*scaleY, 500*scaleX, 200*scaleY, 30, 100, [
+                    [540*scaleX, 500*scaleY, 455*scaleX, 417*scaleY, 340*scaleX, 400*scaleY, 13, 100, [
+                        [450*scaleX, 435*scaleY, 434*scaleX, 430*scaleY, 394*scaleX, 395*scaleY, 2, 40]
                     ]],
-                    [550, 445, 600, 356, 680, 345, 12, 100, [
-                        [578, 400, 648, 409, 661, 426, 3, 80]
+                    [550*scaleX, 445*scaleY, 600*scaleX, 356*scaleY, 680*scaleX, 345*scaleY, 12, 100, [
+                        [578*scaleX, 400*scaleY, 648*scaleX, 409*scaleY, 661*scaleX, 426*scaleY, 3, 80]
                     ]],
-                    [539, 281, 537, 248, 534, 217, 3, 40],
-                    [546, 397, 413, 247, 328, 244, 9, 80, [
-                        [427, 286, 383, 253, 371, 205, 2, 40],
-                        [498, 345, 435, 315, 395, 330, 4, 60]
+                    [539*scaleX, 281*scaleY, 537*scaleX, 248*scaleY, 534*scaleX, 217*scaleY, 3, 40],
+                    [546*scaleX, 397*scaleY, 413*scaleX, 247*scaleY, 328*scaleX, 244*scaleY, 9, 80, [
+                        [427*scaleX, 286*scaleY, 383*scaleX, 253*scaleY, 371*scaleX, 205*scaleY, 2, 40],
+                        [498*scaleX, 345*scaleY, 435*scaleX, 315*scaleY, 395*scaleX, 330*scaleY, 4, 60]
                     ]],
-                    [546, 357, 608, 252, 678, 221, 6, 100, [
-                        [590, 293, 646, 277, 648, 271, 2, 80]
+                    [546*scaleX, 357*scaleY, 608*scaleX, 252*scaleY, 678*scaleX, 221*scaleY, 6, 100, [
+                        [590*scaleX, 293*scaleY, 646*scaleX, 277*scaleY, 648*scaleX, 271*scaleY, 2, 80]
                     ]]
                 ]] 
             ],
             bloom: {
-                num: 700,
-                width: 1080,
-                height: 650,
+                num: width < 768 ? 300 : 700,
+                width: width,
+                height: height,
             },
             footer: {
-                width: 1200,
+                width: width,
                 height: 5,
                 speed: 10,
             }
-        }
+        };
 
-        var tree = new Tree(canvas[0], width, height, opts);
+        var tree = new Tree(canvas, width, height, opts);
         var seed = tree.seed;
         var foot = tree.footer;
         var hold = 1;
 
-        canvas.click(function(e) {
+        function playAudio() {
+            var audio = document.getElementById("myAudio");
+            if (audio) audio.play();
+        }
+
+        $(canvas).on('click touchstart', function(e) {
+            e.preventDefault();
             playAudio();
-            var offset = canvas.offset(), x, y;
-            x = e.pageX - offset.left;
-            y = e.pageY - offset.top;
-            if (seed.hover(x, y)) {
-                hold = 0; 
-                canvas.unbind("click");
-                canvas.unbind("mousemove");
-                canvas.removeClass('hand');
+            
+            var offset = $(canvas).offset();
+            var x, y;
+            
+            if (e.type === 'touchstart') {
+                x = e.originalEvent.touches[0].pageX - offset.left;
+                y = e.originalEvent.touches[0].pageY - offset.top;
+            } else {
+                x = e.pageX - offset.left;
+                y = e.pageY - offset.top;
             }
-        }).mousemove(function(e) {
-            var offset = canvas.offset(), x, y;
-            x = e.pageX - offset.left;
-            y = e.pageY - offset.top;
-            canvas.toggleClass('hand', seed.hover(x, y));
+            
+            if (seed.hover(x, y)) {
+                hold = 0;
+                $(canvas).off('click touchstart mousemove');
+                $(canvas).removeClass('hand');
+            }
+        }).on('mousemove', function(e) {
+            var offset = $(canvas).offset();
+            var x = e.pageX - offset.left;
+            var y = e.pageY - offset.top;
+            $(canvas).toggleClass('hand', seed.hover(x, y));
         });
 
         var seedAnimate = eval(Jscex.compile("async", function () {
@@ -185,18 +343,22 @@
         }));
 
         var moveAnimate = eval(Jscex.compile("async", function () {
-            tree.snapshot("p1", 240, 0, 610, 680);
-            while (tree.move("p1", 500, 0)) {
+            var snapshot1X = width * 0.22;
+            var snapshot2X = width * 0.45;
+            var snapshotWidth = width * 0.55;
+            
+            tree.snapshot("p1", snapshot1X, 0, snapshotWidth, height);
+            while (tree.move("p1", snapshot2X, 0)) {
                 foot.draw();
                 $await(Jscex.Async.sleep(10));
             }
             foot.draw();
-            tree.snapshot("p2", 500, 0, 610, 680);
+            tree.snapshot("p2", snapshot2X, 0, snapshotWidth, height);
 
-            canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
-            canvas.css("background", "#ffe");
+            $(canvas).parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
+            $(canvas).css("background", "#ffe");
             $await(Jscex.Async.sleep(300));
-            canvas.css("background", "none");
+            $(canvas).css("background", "none");
         }));
 
         var textAnimate = eval(Jscex.compile("async", function () {
@@ -204,7 +366,7 @@
             $await(Jscex.Async.sleep(100));
             $("#clock-box").fadeIn(500);
         }));
-	    
+
         var runAsync = eval(Jscex.compile("async", function () {
             $await(seedAnimate());
             $await(growAnimate());
@@ -214,7 +376,7 @@
         }));
 
         runAsync().start();
-        
+
         // Start the date counter
         setInterval(function() {
             timeElapse("01/06/2005");
